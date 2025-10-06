@@ -61,9 +61,14 @@ PERMANENT_INFO = {
         {"desc": "Trailblazer Cup 2025 (2nd Runner Up)"},
         {"desc": "Virtual Innovation Competition (VIC) 2024 (Gold Medal)"}
     ],
+    # Changed structure: each activity is a single dict with both title and desc
     "extracurricular_activities": [
-        {"title": "IoT Sensor Monitoring and Data Logging to Google Sheet Workshop"},
-        {"desc": "Learn to create the dashboard using Node-Red"}
+        {
+            "title": "IoT Sensor Monitoring and Data Logging to Google Sheet Workshop",
+            "desc": "Learned to create the dashboard using Node-Red"
+        },
+        # You can add more like this:
+        # {"title": "Hackathon XYZ 2025", "desc": "Built an AI-powered mobile app for real-time plant disease detection."}
     ],
 }
 
@@ -119,7 +124,12 @@ st.markdown('<span class="section-title">Extracurricular Activities</span>', uns
 activities = PERMANENT_INFO.get("extracurricular_activities", [])
 if activities:
     for act in activities:
-        st.write(f"- {act}")
+        title = act.get("title")
+        desc = act.get("desc")
+        if title:
+            st.write(f"**{title}**")
+        if desc:
+            st.write(desc)
 else:
     st.write("_No extracurricular activities listed._")
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
