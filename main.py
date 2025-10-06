@@ -68,7 +68,7 @@ if st.button("Preview Resume"):
     st.write(edu_desc)
 
     st.write("### Experience")
-    st.write(f"**{work_position}**, {work_company} ({work_duration})")
+    st.write(f"{work_company} ({work_duration})")
     st.write(work_desc)
 
     st.write("### Skills")
