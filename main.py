@@ -55,18 +55,11 @@ st.markdown('<div class="resume-header">', unsafe_allow_html=True)
 
 # Profile Picture Upload
 col1, col2 = st.columns([1,3])
-with col1:
-    profile_pic_file = st.file_uploader("Upload Your Photo", type=["png", "jpg", "jpeg"])
-    if profile_pic_file:
-        image = Image.open(profile_pic_file)
-        st.image(image, use_column_width=True, output_format="JPEG", caption="Profile Photo")
-    else:
-        # Use your local image as the default profile photo
         st.image("WhatsApp Image 2025-10-01 at 09.28.10_c1808e1d.jpg", width=160, caption="Profile Photo")
 
 with col2:
     st.markdown('<h1 style="margin-bottom:0;">My Resume</h1>', unsafe_allow_html=True)
-    st.write("Showcase your profile in style 🚀")
+    st.write("Showcase your profile in style")
     st.write("---")
 st.markdown('</div>', unsafe_allow_html=True)
 
@@ -127,17 +120,17 @@ if st.button("Preview Resume"):
         st.write(f"[GitHub]({github})")
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-    st.markdown("### 🎓 Education")
+    st.markdown("### Education")
     st.write(f"**{edu_degree}**, {edu_school} ({edu_year})")
     st.write(edu_desc)
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-    st.markdown("### 🛠️ Skills")
+    st.markdown("### Skills")
     if skills:
         st.markdown("".join([f'<span class="skill-badge">{s}</span>' for s in skills]), unsafe_allow_html=True)
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-    st.markdown("### 🏆 Projects & Achievements")
+    st.markdown("### Projects & Achievements")
     for title, desc in achievements:
         if title:
             st.write(f"**{title}**")
