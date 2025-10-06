@@ -90,7 +90,7 @@ st.write(f"**{PERMANENT_INFO['edu_degree']}**, {PERMANENT_INFO['edu_school']} ({
 st.write(PERMANENT_INFO['edu_desc'])
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-# --- SKILLS (box design removed) ---
+# --- SKILLS ---
 st.markdown('<span class="section-title">Skills</span>', unsafe_allow_html=True)
 skills_list = ", ".join(PERMANENT_INFO['skills']) if PERMANENT_INFO.get('skills') else "_No skills listed._"
 st.write(skills_list)
@@ -111,23 +111,7 @@ else:
     st.write("_No achievements added yet._")
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-# --- PROJECTS (optional) ---
-st.markdown('<span class="section-title">Projects</span>', unsafe_allow_html=True)
-projects = PERMANENT_INFO.get("projects", [])
-if projects:
-    for proj in projects:
-        title = proj.get("title")
-        desc = proj.get("desc")
-        link = proj.get("link")
-        if title:
-            if link:
-                st.write(f"**{title}** – [{link}]({link})")
-            else:
-                st.write(f"**{title}**")
-        if desc:
-            st.write(desc)
-else:
-st.markdown('<hr class="divider">', unsafe_allow_html=True)
+# (Projects section removed as requested)
 
 # --- PREVIEW SECTION ---
 st.markdown('<span class="section-title">Download or Preview</span>', unsafe_allow_html=True)
@@ -150,7 +134,7 @@ if st.button("Preview Resume"):
     st.write(PERMANENT_INFO['edu_desc'])
     st.markdown('---')
 
-    # Skills (simple text list)
+    # Skills
     st.markdown("### Skills")
     st.write(skills_list)
     st.markdown('---')
@@ -167,4 +151,4 @@ if st.button("Preview Resume"):
         st.write("_No achievements listed._")
     st.markdown('---')
 
-
+    st.markdown('</div>', unsafe_allow_html=True)
