@@ -61,6 +61,10 @@ PERMANENT_INFO = {
         {"desc": "Trailblazer Cup 2025 (2nd Runner Up)"},
         {"desc": "Virtual Innovation Competition (VIC) 2024 (Gold Medal)"}
     ],
+    "extracurricular_activities": [
+        "IoT Sensor Monitoring and Data Logging to Google Sheet Workshop",
+        "Learn to create the dashboard using Node-Red"
+    ],
 }
 
 # --- HEADER WITH IMAGE ---
@@ -111,7 +115,15 @@ else:
     st.write("_No achievements added yet._")
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-# (Projects section removed as requested)
+# --- EXTRACURRICULAR ACTIVITIES ---
+st.markdown('<span class="section-title">Extracurricular Activities</span>', unsafe_allow_html=True)
+activities = PERMANENT_INFO.get("extracurricular_activities", [])
+if activities:
+    for act in activities:
+        st.write(f"- {act}")
+else:
+    st.write("_No extracurricular activities listed._")
+st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 # --- PREVIEW SECTION ---
 st.markdown('<span class="section-title">Download or Preview</span>', unsafe_allow_html=True)
@@ -149,6 +161,15 @@ if st.button("Preview Resume"):
                 st.write(ach["desc"])
     else:
         st.write("_No achievements listed._")
+    st.markdown('---')
+
+    # Extracurricular Activities
+    st.markdown("### Extracurricular Activities")
+    if activities:
+        for act in activities:
+            st.write(f"- {act}")
+    else:
+        st.write("_No extracurricular activities listed._")
     st.markdown('---')
 
     st.markdown('</div>', unsafe_allow_html=True)
