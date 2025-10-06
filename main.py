@@ -61,7 +61,8 @@ with col1:
         image = Image.open(profile_pic_file)
         st.image(image, use_column_width=True, output_format="JPEG", caption="Profile Photo")
     else:
-        st.image("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", width=160, caption="Profile Photo")
+        # Use your local image as the default profile photo
+        st.image("WhatsApp Image 2025-10-01 at 09.28.10_c1808e1d.jpg", width=160, caption="Profile Photo")
 
 with col2:
     st.markdown('<h1 style="margin-bottom:0;">My Resume</h1>', unsafe_allow_html=True)
@@ -116,7 +117,7 @@ if st.button("Preview Resume"):
     if profile_pic_file:
         st.image(image, width=160)
     else:
-        st.image("https://cdn-icons-png.flaticon.com/512/3135/3135715.png", width=160)
+        st.image("WhatsApp Image 2025-10-01 at 09.28.10_c1808e1d.jpg", width=160)
 
     st.markdown(f"## {full_name}")
     st.write(f"**Email:** {email}  \n**Phone:** {phone}")
