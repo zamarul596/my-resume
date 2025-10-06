@@ -127,7 +127,6 @@ if projects:
         if desc:
             st.write(desc)
 else:
-    st.write("_No projects added yet._")
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 # --- PREVIEW SECTION ---
