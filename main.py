@@ -62,8 +62,8 @@ PERMANENT_INFO = {
         {"desc": "Virtual Innovation Competition (VIC) 2024 (Gold Medal)"}
     ],
     "extracurricular_activities": [
-        "###IoT Sensor Monitoring and Data Logging to Google Sheet Workshop",
-        "Learn to create the dashboard using Node-Red"
+        {"tittle": "IoT Sensor Monitoring and Data Logging to Google Sheet Workshop"},
+        {"desc": "Learn to create the dashboard using Node-Red"}
     ],
 }
 
@@ -166,7 +166,10 @@ if st.button("Preview Resume"):
     st.markdown("### Extracurricular Activities")
     if activities:
         for act in activities:
-            st.write(f"- {act}")
+            if ach.get("title"):
+                st.write(f"**{ach['title']}**")
+            if ach.get("desc"):
+                st.write(ach["desc"])
     else:
         st.write("_No extracurricular activities listed._")
     st.markdown('---')
