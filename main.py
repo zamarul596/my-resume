@@ -62,7 +62,7 @@ PERMANENT_INFO = {
         {"desc": "Virtual Innovation Competition (VIC) 2024 (Gold Medal)"}
     ],
     "extracurricular_activities": [
-        "IoT Sensor Monitoring and Data Logging to Google Sheet Workshop",
+        "###IoT Sensor Monitoring and Data Logging to Google Sheet Workshop",
         "Learn to create the dashboard using Node-Red"
     ],
 }
@@ -78,7 +78,6 @@ with col1:
         st.warning("Profile image not found. Check 'profile_img_path'.")
 with col2:
     st.markdown(f'<h1 style="margin-bottom:0;">{PERMANENT_INFO["full_name"]}</h1>', unsafe_allow_html=True)
-    st.write("Showcase your profile in style")
     st.write("---")
 st.markdown('</div>', unsafe_allow_html=True)
 
