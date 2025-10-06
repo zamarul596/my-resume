@@ -24,9 +24,6 @@ st.markdown("""
             object-fit: cover;
             box-shadow: 0 2px 10px rgba(46,140,255,0.1);
         }
-        .info-text {
-            font-size: 1.1rem;
-        }
         .section-title {
             color: #2e8cff;
             letter-spacing: 1px;
@@ -47,10 +44,13 @@ st.markdown("""
             border-radius: 8px;
             font-size: 1em;
         }
+        .item-title {
+            font-weight: 600;
+        }
     </style>
 """, unsafe_allow_html=True)
 
-# --- PERMANENT PROFILE DATA ---
+# --- PERMANENT PROFILE DATA (EDIT HERE) ---
 PERMANENT_INFO = {
     "full_name": "ZAMARUL HISYAM BIN MOHD ZAINI",
     "email": "zamarulhisyam1611@gmail.com",
@@ -62,22 +62,48 @@ PERMANENT_INFO = {
     "edu_degree": "Bachelor of Information Technology",
     "edu_year": "2022 - 2026",
     "edu_desc": "A Bachelor of Information Technology student at University Malaysia Kelantan, tracking in Artificial Intelligence (AI) with strong skills in software development and data analysis.",
-    "skills": ["Python", "Dart", "AI", "Java", "Firebase", "Flutter", "VS Code"]
+    "skills": ["Python", "Dart", "AI", "Java", "Firebase", "Flutter", "VS Code"],
+    # Add or edit achievements here
+    "achievements": [
+        {
+            "title": "Dean's List Award",
+            "desc": "Recognized for academic excellence (2023 session)."
+        },
+        {
+            "title": "AI Competition Finalist",
+            "desc": "Reached finals in National AI Challenge 2024 building a predictive analytics model."
+        }
+    ],
+    # Optional: Separate projects list (you can merge with achievements if you prefer)
+    "projects": [
+        {
+            "title": "Smart Attendance App",
+            "desc": "Built a Flutter + Firebase attendance system with QR scanning and real-time cloud sync.",
+            "link": "https://github.com/zamarul596"  # Optional: remove if no link
+        },
+        {
+            "title": "AI-Based Study Helper",
+            "desc": "Developed a Python tool using NLP to summarize lecture notes."
+        }
+    ]
 }
 
 # --- HEADER WITH IMAGE ---
 st.markdown('<div class="resume-header">', unsafe_allow_html=True)
 col1, col2 = st.columns([1, 3])
 with col1:
-    image = Image.open(PERMANENT_INFO["profile_img_path"])
-    st.image(image, width=160, caption="Profile Photo", output_format="auto")
+    try:
+        image = Image.open(PERMANENT_INFO["profile_img_path"])
+        st.image(image, width=160, caption="Profile Photo", output_format="auto")
+    except Exception:
+        st.warning("Profile image not found. Check 'profile_img_path'.")
 with col2:
     st.markdown(f'<h1 style="margin-bottom:0;">{PERMANENT_INFO["full_name"]}</h1>', unsafe_allow_html=True)
     st.write("Showcase your profile in style")
     st.write("---")
 st.markdown('</div>', unsafe_allow_html=True)
 
-# --- BASIC INFO ---
+# --- PERSONAL INFO ---
 st.markdown('<span class="section-title">Personal Information</span>', unsafe_allow_html=True)
 st.write(f"**Email:** {PERMANENT_INFO['email']}  \n**Phone:** {PERMANENT_INFO['phone']}")
 st.write(f"[LinkedIn]({PERMANENT_INFO['linkedin']}) | [GitHub]({PERMANENT_INFO['github']})")
@@ -94,58 +120,90 @@ st.markdown('<span class="section-title">Skills</span>', unsafe_allow_html=True)
 st.markdown("".join([f'<span class="skill-badge">{s}</span>' for s in PERMANENT_INFO['skills']]), unsafe_allow_html=True)
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-# --- PROJECTS & ACHIEVEMENTS ---
-st.markdown('<span class="section-title">Projects & Achievements</span>', unsafe_allow_html=True)
-st.info("Add your Achievements & Projects below. They will be appended to your permanent resume but are not editable after refresh.")
-achievement_projects = st.session_state.get("achievement_projects", [])
-
-with st.form("achieve_form", clear_on_submit=True):
-    title = st.text_input("Achievement/Project Title")
-    desc = st.text_area("Description")
-    submitted = st.form_submit_button("Add Achievement / Project")
-    if submitted and (title or desc):
-        achievement_projects.append({"title": title.strip(), "desc": desc.strip()})
-        st.session_state["achievement_projects"] = achievement_projects
-
-# Display all achievements
-if achievement_projects:
-    for item in achievement_projects:
-        if item["title"]:
-            st.write(f"**{item['title']}**")
-        if item["desc"]:
-            st.write(item["desc"])
+# --- ACHIEVEMENTS ---
+st.markdown('<span class="section-title">Achievements</span>', unsafe_allow_html=True)
+achievements = PERMANENT_INFO.get("achievements", [])
+if achievements:
+    for ach in achievements:
+        title = ach.get("title")
+        desc = ach.get("desc")
+        if title:
+            st.write(f"**{title}**")
+        if desc:
+            st.write(desc)
 else:
-    st.write("No achievements/projects added yet.")
-
+    st.write("_No achievements added yet._")
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-# --- DOWNLOAD SECTION / PREVIEW ---
+# --- PROJECTS (optional) ---
+st.markdown('<span class="section-title">Projects</span>', unsafe_allow_html=True)
+projects = PERMANENT_INFO.get("projects", [])
+if projects:
+    for proj in projects:
+        title = proj.get("title")
+        desc = proj.get("desc")
+        link = proj.get("link")
+        if title:
+            if link:
+                st.write(f"**{title}** – [{link}]({link})")
+            else:
+                st.write(f"**{title}**")
+        if desc:
+            st.write(desc)
+else:
+    st.write("_No projects added yet._")
+st.markdown('<hr class="divider">', unsafe_allow_html=True)
+
+# --- PREVIEW SECTION ---
 st.markdown('<span class="section-title">Download or Preview</span>', unsafe_allow_html=True)
 if st.button("Preview Resume"):
     st.markdown('<div style="background:white;padding:2rem;border-radius:20px;box-shadow:0 2px 12px rgba(46,140,255,0.05);">', unsafe_allow_html=True)
-    st.image(PERMANENT_INFO["profile_img_path"], width=160)
-    
+
+    # Header
+    try:
+        st.image(PERMANENT_INFO["profile_img_path"], width=140)
+    except Exception:
+        pass
     st.markdown(f"## {PERMANENT_INFO['full_name']}")
     st.write(f"**Email:** {PERMANENT_INFO['email']}  \n**Phone:** {PERMANENT_INFO['phone']}")
     st.write(f"[LinkedIn]({PERMANENT_INFO['linkedin']}) | [GitHub]({PERMANENT_INFO['github']})")
-    st.markdown('<hr class="divider">', unsafe_allow_html=True)
+    st.markdown('---')
 
+    # Education
     st.markdown("### Education")
     st.write(f"**{PERMANENT_INFO['edu_degree']}**, {PERMANENT_INFO['edu_school']} ({PERMANENT_INFO['edu_year']})")
     st.write(PERMANENT_INFO['edu_desc'])
-    st.markdown('<hr class="divider">', unsafe_allow_html=True)
+    st.markdown('---')
 
+    # Skills
     st.markdown("### Skills")
     st.markdown("".join([f'<span class="skill-badge">{s}</span>' for s in PERMANENT_INFO['skills']]), unsafe_allow_html=True)
-    st.markdown('<hr class="divider">', unsafe_allow_html=True)
+    st.markdown('---')
 
-    st.markdown("### Projects & Achievements")
-    if achievement_projects:
-        for item in achievement_projects:
-            if item["title"]:
-                st.write(f"**{item['title']}**")
-            if item["desc"]:
-                st.write(item["desc"])
+    # Achievements
+    st.markdown("### Achievements")
+    if achievements:
+        for ach in achievements:
+            if ach.get("title"):
+                st.write(f"**{ach['title']}**")
+            if ach.get("desc"):
+                st.write(ach["desc"])
     else:
-        st.write("_No achievements/projects listed yet._")
+        st.write("_No achievements listed._")
+    st.markdown('---')
+
+    # Projects
+    st.markdown("### Projects")
+    if projects:
+        for proj in projects:
+            if proj.get("title"):
+                if proj.get("link"):
+                    st.write(f"**{proj['title']}** – [{proj['link']}]({proj['link']})")
+                else:
+                    st.write(f"**{proj['title']}**")
+            if proj.get("desc"):
+                st.write(proj["desc"])
+    else:
+        st.write("_No projects listed._")
+
     st.markdown('</div>', unsafe_allow_html=True)
