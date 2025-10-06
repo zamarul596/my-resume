@@ -50,55 +50,72 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
+# --- PERMANENT PROFILE DATA ---
+PERMANENT_INFO = {
+    "full_name": "ZAMARUL HISYAM BIN MOHD ZAINI",
+    "email": "zamarulhisyam1611@gmail.com",
+    "phone": "014-8115198",
+    "linkedin": "https://www.linkedin.com/in/zamarul-hisyam-9a1a25366/",
+    "github": "https://github.com/zamarul596",
+    "profile_img_path": "WhatsApp Image 2025-10-01 at 09.28.10_c1808e1d.jpg",
+    "edu_school": "University Malaysia Kelantan",
+    "edu_degree": "Bachelor of Information Technology",
+    "edu_year": "2022 - 2026",
+    "edu_desc": "A Bachelor of Information Technology student at University Malaysia Kelantan, tracking in Artificial Intelligence (AI) with strong skills in software development and data analysis.",
+    "skills": ["Python", "Dart", "AI", "Java", "Firebase", "Flutter", "VS Code"]
+}
+
 # --- HEADER WITH IMAGE ---
 st.markdown('<div class="resume-header">', unsafe_allow_html=True)
-
-# Profile Picture Upload
-col1, col2 = st.columns([1,3])
-        st.image("WhatsApp Image 2025-10-01 at 09.28.10_c1808e1d.jpg", width=160, caption="Profile Photo")
-
+col1, col2 = st.columns([1, 3])
+with col1:
+    image = Image.open(PERMANENT_INFO["profile_img_path"])
+    st.image(image, width=160, caption="Profile Photo", output_format="auto")
 with col2:
-    st.markdown('<h1 style="margin-bottom:0;">My Resume</h1>', unsafe_allow_html=True)
+    st.markdown(f'<h1 style="margin-bottom:0;">{PERMANENT_INFO["full_name"]}</h1>', unsafe_allow_html=True)
     st.write("Showcase your profile in style")
     st.write("---")
 st.markdown('</div>', unsafe_allow_html=True)
 
 # --- BASIC INFO ---
 st.markdown('<span class="section-title">Personal Information</span>', unsafe_allow_html=True)
-full_name = st.text_input("Full Name", placeholder="ZAMARUL HISYAM BIN MOHD ZAINI")
-email = st.text_input("Email", placeholder="zamarulhisyam1611@gmail.com")
-phone = st.text_input("Phone Number", placeholder="014-8115198")
-linkedin = st.text_input("LinkedIn", placeholder="https://www.linkedin.com/in/zamarul-hisyam-9a1a25366/")
-github = st.text_input("GitHub (optional)", placeholder="https://github.com/zamarul596")
-
+st.write(f"**Email:** {PERMANENT_INFO['email']}  \n**Phone:** {PERMANENT_INFO['phone']}")
+st.write(f"[LinkedIn]({PERMANENT_INFO['linkedin']}) | [GitHub]({PERMANENT_INFO['github']})")
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 # --- EDUCATION ---
 st.markdown('<span class="section-title">Education</span>', unsafe_allow_html=True)
-with st.expander("Education Details", expanded=True):
-    edu_school = st.text_input("University", value="University Malaysia Kelantan")
-    edu_degree = st.text_input("Degree", value="Bachelor of Information Technology")
-    edu_year = st.text_input("Year / Duration", placeholder="2022 - 2026")
-    edu_desc = st.text_area("Description (optional)", placeholder="A Bachelor of Information Technology student at University Malaysia Kelantan track in Artificial Intelligent (AI) with strong skills ...")
-
+st.write(f"**{PERMANENT_INFO['edu_degree']}**, {PERMANENT_INFO['edu_school']} ({PERMANENT_INFO['edu_year']})")
+st.write(PERMANENT_INFO['edu_desc'])
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 # --- SKILLS ---
 st.markdown('<span class="section-title">Skills</span>', unsafe_allow_html=True)
-skills_input = st.text_area("List your key skills (separated by commas)", placeholder="Python, Dart, AI, Java, Firebase, Flutter, VS code")
-skills = [skill.strip() for skill in skills_input.split(',') if skill.strip()]
-
+st.markdown("".join([f'<span class="skill-badge">{s}</span>' for s in PERMANENT_INFO['skills']]), unsafe_allow_html=True)
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 # --- PROJECTS & ACHIEVEMENTS ---
 st.markdown('<span class="section-title">Projects & Achievements</span>', unsafe_allow_html=True)
-achievements = []
-with st.expander("Achievements & Projects", expanded=True):
-    for i in range(1, 6):
-        title = st.text_input(f"Achievement/Project Title {i}", key=f"title_{i}")
-        desc = st.text_area(f"Description {i}", key=f"desc_{i}")
-        if title or desc:
-            achievements.append((title, desc))
+st.info("Add your Achievements & Projects below. They will be appended to your permanent resume but are not editable after refresh.")
+achievement_projects = st.session_state.get("achievement_projects", [])
+
+with st.form("achieve_form", clear_on_submit=True):
+    title = st.text_input("Achievement/Project Title")
+    desc = st.text_area("Description")
+    submitted = st.form_submit_button("Add Achievement / Project")
+    if submitted and (title or desc):
+        achievement_projects.append({"title": title.strip(), "desc": desc.strip()})
+        st.session_state["achievement_projects"] = achievement_projects
+
+# Display all achievements
+if achievement_projects:
+    for item in achievement_projects:
+        if item["title"]:
+            st.write(f"**{item['title']}**")
+        if item["desc"]:
+            st.write(item["desc"])
+else:
+    st.write("No achievements/projects added yet.")
 
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
@@ -106,34 +123,29 @@ st.markdown('<hr class="divider">', unsafe_allow_html=True)
 st.markdown('<span class="section-title">Download or Preview</span>', unsafe_allow_html=True)
 if st.button("Preview Resume"):
     st.markdown('<div style="background:white;padding:2rem;border-radius:20px;box-shadow:0 2px 12px rgba(46,140,255,0.05);">', unsafe_allow_html=True)
-    # Profile Image
-    if profile_pic_file:
-        st.image(image, width=160)
-    else:
-        st.image("WhatsApp Image 2025-10-01 at 09.28.10_c1808e1d.jpg", width=160)
-
-    st.markdown(f"## {full_name}")
-    st.write(f"**Email:** {email}  \n**Phone:** {phone}")
-    if linkedin:
-        st.write(f"[LinkedIn]({linkedin})")
-    if github:
-        st.write(f"[GitHub]({github})")
+    st.image(PERMANENT_INFO["profile_img_path"], width=160)
+    
+    st.markdown(f"## {PERMANENT_INFO['full_name']}")
+    st.write(f"**Email:** {PERMANENT_INFO['email']}  \n**Phone:** {PERMANENT_INFO['phone']}")
+    st.write(f"[LinkedIn]({PERMANENT_INFO['linkedin']}) | [GitHub]({PERMANENT_INFO['github']})")
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
     st.markdown("### Education")
-    st.write(f"**{edu_degree}**, {edu_school} ({edu_year})")
-    st.write(edu_desc)
+    st.write(f"**{PERMANENT_INFO['edu_degree']}**, {PERMANENT_INFO['edu_school']} ({PERMANENT_INFO['edu_year']})")
+    st.write(PERMANENT_INFO['edu_desc'])
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
     st.markdown("### Skills")
-    if skills:
-        st.markdown("".join([f'<span class="skill-badge">{s}</span>' for s in skills]), unsafe_allow_html=True)
+    st.markdown("".join([f'<span class="skill-badge">{s}</span>' for s in PERMANENT_INFO['skills']]), unsafe_allow_html=True)
     st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
     st.markdown("### Projects & Achievements")
-    for title, desc in achievements:
-        if title:
-            st.write(f"**{title}**")
-        if desc:
-            st.write(desc)
+    if achievement_projects:
+        for item in achievement_projects:
+            if item["title"]:
+                st.write(f"**{item['title']}**")
+            if item["desc"]:
+                st.write(item["desc"])
+    else:
+        st.write("_No achievements/projects listed yet._")
     st.markdown('</div>', unsafe_allow_html=True)
