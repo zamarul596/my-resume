@@ -35,15 +35,6 @@ st.markdown("""
             border-top: 2px solid #e2e6ea;
             margin: 1.5rem 0;
         }
-        .skill-badge {
-            display: inline-block;
-            background: #eaf4fe;
-            color: #2e8cff;
-            padding: 0.3em 0.8em;
-            margin: 0.2em 0.3em 0.2em 0;
-            border-radius: 8px;
-            font-size: 1em;
-        }
         .item-title {
             font-weight: 600;
         }
@@ -63,23 +54,12 @@ PERMANENT_INFO = {
     "edu_year": "2022 - 2026",
     "edu_desc": "A Bachelor of Information Technology student at University Malaysia Kelantan, tracking in Artificial Intelligence (AI) with strong skills in software development and data analysis.",
     "skills": ["Python", "Dart", "AI", "Java", "Firebase", "Flutter", "VS Code"],
-    # Add or edit achievements here
     "achievements": [
-        {
-            "desc": "Top 10, Big Spark 2024"
-        },
-        {
-            "desc": "Top 30, The Next Big Thing Start Up Competition 2024/2025"
-        },
-          {
-            "desc": "Swiss Innovation Competition (SIC) 2025"
-        },
-              {
-            "desc": "Trailblazer Cup 2025 (2nd Runner Up)"
-        },
-               {
-            "desc": "Virtual Innovation Competition (VIC) 2024 (Gold Medal)"
-        }
+        {"desc": "Top 10, Big Spark 2024"},
+        {"desc": "Top 30, The Next Big Thing Start Up Competition 2024/2025"},
+        {"desc": "Swiss Innovation Competition (SIC) 2025"},
+        {"desc": "Trailblazer Cup 2025 (2nd Runner Up)"},
+        {"desc": "Virtual Innovation Competition (VIC) 2024 (Gold Medal)"}
     ],
 }
 
@@ -110,9 +90,10 @@ st.write(f"**{PERMANENT_INFO['edu_degree']}**, {PERMANENT_INFO['edu_school']} ({
 st.write(PERMANENT_INFO['edu_desc'])
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-# --- SKILLS ---
+# --- SKILLS (box design removed) ---
 st.markdown('<span class="section-title">Skills</span>', unsafe_allow_html=True)
-st.markdown("".join([f'<span class="skill-badge">{s}</span>' for s in PERMANENT_INFO['skills']]), unsafe_allow_html=True)
+skills_list = ", ".join(PERMANENT_INFO['skills']) if PERMANENT_INFO.get('skills') else "_No skills listed._"
+st.write(skills_list)
 st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
 # --- ACHIEVEMENTS ---
@@ -170,9 +151,9 @@ if st.button("Preview Resume"):
     st.write(PERMANENT_INFO['edu_desc'])
     st.markdown('---')
 
-    # Skills
+    # Skills (simple text list)
     st.markdown("### Skills")
-    st.markdown("".join([f'<span class="skill-badge">{s}</span>' for s in PERMANENT_INFO['skills']]), unsafe_allow_html=True)
+    st.write(skills_list)
     st.markdown('---')
 
     # Achievements
