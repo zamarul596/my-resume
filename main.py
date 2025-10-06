@@ -168,18 +168,4 @@ if st.button("Preview Resume"):
         st.write("_No achievements listed._")
     st.markdown('---')
 
-    # Projects
-    st.markdown("### Projects")
-    if projects:
-        for proj in projects:
-            if proj.get("title"):
-                if proj.get("link"):
-                    st.write(f"**{proj['title']}** – [{proj['link']}]({proj['link']})")
-                else:
-                    st.write(f"**{proj['title']}**")
-            if proj.get("desc"):
-                st.write(proj["desc"])
-    else:
-        st.write("_No projects listed._")
 
-    st.markdown('</div>', unsafe_allow_html=True)
