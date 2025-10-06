@@ -81,6 +81,7 @@ PERMANENT_INFO = {
             "desc": "Virtual Innovation Competition (VIC) 2024 (Gold Medal)"
         }
     ],
+}
 
 # --- HEADER WITH IMAGE ---
 st.markdown('<div class="resume-header">', unsafe_allow_html=True)
