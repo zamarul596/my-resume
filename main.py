@@ -66,27 +66,21 @@ PERMANENT_INFO = {
     # Add or edit achievements here
     "achievements": [
         {
-            "title": "Dean's List Award",
-            "desc": "Recognized for academic excellence (2023 session)."
+            "desc": "Top 10, Big Spark 2024"
         },
         {
-            "title": "AI Competition Finalist",
-            "desc": "Reached finals in National AI Challenge 2024 building a predictive analytics model."
+            "desc": "Top 30, The Next Big Thing Start Up Competition 2024/2025"
+        },
+          {
+            "desc": "Swiss Innovation Competition (SIC) 2025"
+        },
+              {
+            "desc": "Trailblazer Cup 2025 (2nd Runner Up)"
+        },
+               {
+            "desc": "Virtual Innovation Competition (VIC) 2024 (Gold Medal)"
         }
     ],
-    # Optional: Separate projects list (you can merge with achievements if you prefer)
-    "projects": [
-        {
-            "title": "Smart Attendance App",
-            "desc": "Built a Flutter + Firebase attendance system with QR scanning and real-time cloud sync.",
-            "link": "https://github.com/zamarul596"  # Optional: remove if no link
-        },
-        {
-            "title": "AI-Based Study Helper",
-            "desc": "Developed a Python tool using NLP to summarize lecture notes."
-        }
-    ]
-}
 
 # --- HEADER WITH IMAGE ---
 st.markdown('<div class="resume-header">', unsafe_allow_html=True)
